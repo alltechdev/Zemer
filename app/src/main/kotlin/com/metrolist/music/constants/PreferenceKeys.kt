@@ -296,21 +296,8 @@ val TranslateLyricsKey = booleanPreferencesKey("translateLyrics")
 val PlayerVolumeKey = floatPreferencesKey("playerVolume")
 val RepeatModeKey = intPreferencesKey("repeatMode")
 
-val SearchSourceKey = stringPreferencesKey("searchSource")
 val SwipeThumbnailKey = booleanPreferencesKey("swipeThumbnail")
 val SwipeSensitivityKey = floatPreferencesKey("swipeSensitivity")
-
-enum class SearchSource {
-    LOCAL,
-    ONLINE,
-    ;
-
-    fun toggle() =
-        when (this) {
-            LOCAL -> ONLINE
-            ONLINE -> LOCAL
-        }
-}
 
 val VisitorDataKey = stringPreferencesKey("visitorData")
 val DataSyncIdKey = stringPreferencesKey("dataSyncId")

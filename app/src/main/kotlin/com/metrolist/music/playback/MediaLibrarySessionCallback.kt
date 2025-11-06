@@ -19,9 +19,7 @@ import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionError
 import androidx.media3.session.SessionResult
 import com.google.common.collect.ImmutableList
-import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.common.util.concurrent.SettableFuture
 import com.metrolist.innertube.YouTube
 import com.metrolist.innertube.models.SongItem
 import com.metrolist.innertube.models.filterExplicit
@@ -40,6 +38,9 @@ import com.metrolist.music.playback.queues.ListQueue
 import com.metrolist.music.utils.dataStore
 import com.metrolist.music.utils.filterWhitelisted
 import com.metrolist.music.utils.get
+import com.metrolist.music.utils.future
+import com.metrolist.music.utils.immediateFuture
+import com.metrolist.music.utils.pendingFuture
 import com.metrolist.music.utils.reportException
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +50,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.guava.future
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
@@ -100,14 +100,14 @@ constructor(
 
             MediaSessionConstants.ACTION_TOGGLE_REPEAT_MODE -> session.player.toggleRepeatMode()
         }
-        return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
+        return immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
     }
 
     override fun onPlaybackResumption(
         mediaSession: MediaSession,
         controller: MediaSession.ControllerInfo
     ): ListenableFuture<MediaItemsWithStartPosition> {
-        return SettableFuture.create<MediaItemsWithStartPosition>()
+        return pendingFuture()
     }
 
     override fun onGetLibraryRoot(
@@ -115,7 +115,7 @@ constructor(
         browser: MediaSession.ControllerInfo,
         params: MediaLibraryService.LibraryParams?,
     ): ListenableFuture<LibraryResult<MediaItem>> =
-        Futures.immediateFuture(
+        immediateFuture(
             LibraryResult.ofItem(
                 MediaItem
                     .Builder()
@@ -336,7 +336,7 @@ constructor(
         params: MediaLibraryService.LibraryParams?
     ): ListenableFuture<LibraryResult<Void>> {
         session.notifySearchResultChanged(browser, query, 1, params)
-        return Futures.immediateFuture(LibraryResult.ofVoid())
+        return immediateFuture(LibraryResult.ofVoid())
     }
 
     override fun onGetSearchResult(

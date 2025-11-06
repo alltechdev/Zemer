@@ -15,7 +15,6 @@ import coil3.toBitmap
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.guava.future
 
 class CoilBitmapLoader(
     private val context: Context,

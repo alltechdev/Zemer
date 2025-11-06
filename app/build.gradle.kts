@@ -21,37 +21,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
+        buildConfigField("String", "ARCHITECTURE", "\"universal\"")
     }
 
-    flavorDimensions += "abi"
-    productFlavors {
-        create("universal") {
-            dimension = "abi"
-            ndk {
-                abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-            }
-            buildConfigField("String", "ARCHITECTURE", "\"universal\"")
-        }
-        create("arm64") {
-            dimension = "abi"
-            ndk { abiFilters += "arm64-v8a" }
-            buildConfigField("String", "ARCHITECTURE", "\"arm64\"")
-        }
-        create("armeabi") {
-            dimension = "abi"
-            ndk { abiFilters += "armeabi-v7a" }
-            buildConfigField("String", "ARCHITECTURE", "\"armeabi\"")
-        }
-        create("x86") {
-            dimension = "abi"
-            ndk { abiFilters += "x86" }
-            buildConfigField("String", "ARCHITECTURE", "\"x86\"")
-        }
-        create("x86_64") {
-            dimension = "abi"
-            ndk { abiFilters += "x86_64" }
-            buildConfigField("String", "ARCHITECTURE", "\"x86_64\"")
-        }
+    androidResources {
+        localeFilters += listOf("en", "iw")
     }
 
     signingConfigs {
@@ -164,9 +139,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 dependencies {
-    implementation(libs.guava)
-    implementation(libs.coroutines.guava)
     implementation(libs.concurrent.futures)
+    implementation(libs.listenablefuture)
 
     implementation(libs.activity)
     implementation(libs.hilt.navigation)
@@ -176,7 +150,7 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.util)
-    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling)
     implementation(libs.compose.animation)
     implementation(libs.compose.reorderable)
 
