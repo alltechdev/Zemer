@@ -4,4 +4,6 @@ Coming soon...
 
 ## Screenshots
 
-<img src="images/screenshots.gif" width="300">
+<p align="center">
+  <img src="images/screenshots.gif" width="300">
+</p>
