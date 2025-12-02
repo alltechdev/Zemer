@@ -6,5 +6,5 @@ Coming soon...
 
 | | | |
 |:---:|:---:|:---:|
-| ![Home](images/home.png) | ![Home 2](images/home_2.png) | ![Nav Drawer](images/nav_drawer.png) |
-| ![Appearance](images/appearance.png) | ![Content Filters](images/content_filters.png) | ![About](images/about.png) |
+| <img src="images/home.png" width="250"> | <img src="images/home_2.png" width="250"> | <img src="images/nav_drawer.png" width="250"> |
+| <img src="images/appearance.png" width="250"> | <img src="images/content_filters.png" width="250"> | <img src="images/about.png" width="250"> |
